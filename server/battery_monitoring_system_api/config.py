@@ -14,13 +14,9 @@ class Config(object):
 
     VERSION = version
 
-    SENTRY_DSN = 'https://dea742b15bfe33c752b13973bf4bd601@o432668.ingest.us.sentry.io/4508868819288064'
-    SENTRY_RELEASE = version
-    SENTRY_PROJECT = 'notification-api'
-    SENTRY_ORG = 'aip-beroun'
-
-    API_TITLE = 'Notification API'
+    API_TITLE = 'Battery Monitoring System API'
     API_VERSION = version
+
     OPENAPI_VERSION = '3.0.2'
     OPENAPI_URL_PREFIX = '/'
 

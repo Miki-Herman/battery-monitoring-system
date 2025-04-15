@@ -1,7 +1,7 @@
 from importlib.metadata import version
 
 def get_version():
-    return f"notification-api@{version('notification_api')}"
+    return f"battery-monitoring-system-api@{version('battery_monitoring_system_api')}"
 
 
 def normalize_response(data, error=None) -> dict:

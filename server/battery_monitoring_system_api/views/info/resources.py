@@ -2,8 +2,8 @@ import sys
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from flask import current_app
-from notification_api.views.info.schemas import InfoSchema
-from notification_api.views.schemas import create_response_schema
+from battery_monitoring_system_api.views.info.schemas import InfoSchema
+from battery_monitoring_system_api.views.schemas import create_response_schema
 
 blp = Blueprint('info', 'info')
 
