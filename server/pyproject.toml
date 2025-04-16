@@ -7,10 +7,10 @@ readme = "README.md"
 packages = [{include = "battery_monitoring_system_api"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 Flask = "==3.0.3"
 flask-smorest = "==0.44.0"
-sentry-sdk = "==2.4.0"
+pymongo = "==4.12.0"
 Flask-JWT-Extended = "==4.6.0"
 marshmallow = "==3.20.1"
 Flask-Cors = "==4.0.1"
