@@ -4,7 +4,8 @@ import time
 from flask import Flask, jsonify
 from webargs import ValidationError
 from .config import ProdConfig
-from .extensions import api, cors
+from .extensions import api, cors, mongo
+
 
 
 def create_app(config_object=ProdConfig, config_file='', timestamp=None, sentry_environment=None):
@@ -24,6 +25,7 @@ def create_app(config_object=ProdConfig, config_file='', timestamp=None, sentry_
         return jsonify({"error": {"msg": "Token has expired", "code": 401}}), 401
 
     register_extensions(app)
+    mongo.init_app(app)
     from .views import register_resources
     register_resources(api)
     register_error_handlers(app)
