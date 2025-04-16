@@ -1,3 +1,9 @@
 {
-  "DATABASE_CONN_STR": "mongodb://localhost:27017/<database>"
+  "DATABASE_CONN_STR": "mongodb://localhost:27017/<database>",
+  "ERROR_MAP": {
+    "0" : "OK",
+    "1" : "Unknown error",
+    "2" : "Unable to connect to database",
+    "3" : "Unable to submit data"
+  }
 }
