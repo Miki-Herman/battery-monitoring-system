@@ -1,4 +1,3 @@
-from bson.json_util import loads,dumps
 from bson.objectid import ObjectId
 from battery_monitoring_system_api.extensions import mongo
 from pymongo import ASCENDING
@@ -13,7 +12,22 @@ class BatteryDatabaseService:
 
     def get_all_by_key(self, key, value):
         data = self.database.battery_data.find({key: value}).sort("timestamp", ASCENDING)
-        return [entry for entry in data]
+        result = []
+
+        for data in data:
+            json_data = {
+                "_id": str(data.get("_id")),
+                "system_id": data.get("system_id"),
+                "timestamp": data.get("timestamp"),
+                "temperature": data.get("temperature"),
+                "current": data.get("current"),
+                "voltage": data.get("voltage")
+            }
+            result.append(json_data)
+
+        return result
+
+
 
     def add(self, data):
         result = self.database.battery_data.insert_one(data)
