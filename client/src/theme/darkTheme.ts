@@ -1,15 +1,15 @@
 import {ThemeOptions} from "@mui/material";
 
-const lightTheme: ThemeOptions = {
+const darkTheme: ThemeOptions = {
     palette: {
-        mode: "light",
+        mode: "dark",
         primary: {
-            main: "#ffff00",
+            main: "#ff0000",
         },
         secondary: {
-            main: "#ff8400",
+            main: "#7000ff",
         }
     }
 }
 
-export default lightTheme;
+export default darkTheme;

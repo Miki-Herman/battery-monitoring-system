@@ -2,7 +2,6 @@
 
 import {useSession} from "next-auth/react";
 
-import Header from "@/app/components/header";
 import Dashboard from "@/app/dashboard/dashboard";
 import Login from "@/app/components/login";
 
@@ -14,7 +13,6 @@ const Home: React.FC  = () => {
 
     return (
         <main className={scss.main}>
-            <Header />
             {
                 session && (
                     <>

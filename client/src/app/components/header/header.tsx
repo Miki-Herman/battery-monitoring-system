@@ -14,9 +14,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import AdbIcon from "@mui/icons-material/Adb";
+import ThemeToggle from "@/app/components/themeToggle";
+import {useMediaQuery} from "@mui/material";
 
-function Header() {
+export type HeaderProps = {
+    ColorModeContext: React.Context<{ toggleColorMode: () => void;}>,
+}
+
+const Header = (props: HeaderProps) => {
     const { data: session, status } = useSession();
+    const mobileCheck = useMediaQuery('(max-width: 500px)');
+    const { ColorModeContext } = props
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -81,17 +89,10 @@ function Header() {
 
                     {/* Right side: email and avatar */}
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                        {session && (
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    color: "white",
-                                    display: { xs: "none", md: "block" }, // Hide email on small screens
-                                }}
-                            >
-                                {userEmail}
-                            </Typography>
+                        {session && !mobileCheck && (
+                            <Typography>Signed in as {userEmail}</Typography>
                         )}
+                        <ThemeToggle ColorModeContext={ ColorModeContext }/>
                         <Tooltip title="Open profile settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 {status === "loading" ? (
