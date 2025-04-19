@@ -14,11 +14,10 @@ const Login = () => {
     }
     return (
         <>
-            <h2>Please login</h2><br/>
+            <h2 style={{ marginBottom: '16px' }}>Please login</h2>
             <Button variant={"contained"} color={"success"} onClick={() => signIn("google")}>Sign in</Button>
         </>
     )
 };
 
 export default Login;
-

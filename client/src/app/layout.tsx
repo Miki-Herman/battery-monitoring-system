@@ -46,7 +46,7 @@ export default function RootLayout({
             createTheme({
                 ...darkTheme,
             }),
-            [mode],
+        []
     );
 
     const lightThemeChosen = React.useMemo(
@@ -54,22 +54,22 @@ export default function RootLayout({
             createTheme({
                 ...lightTheme,
             }),
-        [mode],
+        []
     );
 
     return (
-        <>
-        <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={mode === 'dark' ? darkThemeChosen : lightThemeChosen}>
-                <SessionProvider>
-                    <CssBaseline />
-                    <Header ColorModeContext={ColorModeContext} />
-                    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                    {children}
-                    </body>
-                </SessionProvider>
-            </ThemeProvider>
-        </ColorModeContext.Provider>
-        </>
+        <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body>
+                <ColorModeContext.Provider value={colorMode}>
+                    <ThemeProvider theme={mode === 'dark' ? darkThemeChosen : lightThemeChosen}>
+                        <SessionProvider>
+                            <CssBaseline />
+                            <Header ColorModeContext={ColorModeContext} />
+                            {children}
+                        </SessionProvider>
+                    </ThemeProvider>
+                </ColorModeContext.Provider>
+            </body>
+        </html>
     );
 }

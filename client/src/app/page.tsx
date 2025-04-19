@@ -15,9 +15,7 @@ const Home: React.FC  = () => {
         <main className={scss.main}>
             {
                 session && (
-                    <>
-                        <Dashboard />
-                    </>
+                    <Dashboard />
                 )
             }
             <Login />
