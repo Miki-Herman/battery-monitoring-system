@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import List from "@mui/material/List";
@@ -13,7 +14,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Person2Icon from "@mui/icons-material/Person2";
 import Settings from "@mui/icons-material/Settings";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import NextLink from "next/link";
 import { Drawer, useMediaQuery } from "@mui/material";
+import scss from "./SideMenu.module.scss";
 
 const drawerWidth = 240;
 
@@ -78,7 +81,7 @@ const SideMenu = () => {
           ...openedMixin(theme),
           "& .MuiDrawer-paper": {
             ...openedMixin(theme),
-            top: mobileCheck ? 64 : 57,
+            top: mobileCheck ? 64 : 54,
             left: 0,
           },
         }),
@@ -86,7 +89,7 @@ const SideMenu = () => {
           ...closedMixin(theme),
           "& .MuiDrawer-paper": {
             ...closedMixin(theme),
-            top: mobileCheck ? 64 : 57,
+            top: 64,
             left: 0,
           },
         }),
@@ -105,51 +108,51 @@ const SideMenu = () => {
       <List>
         {menuListTranslations.map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
+            <NextLink
+              className={scss.link}
+              href={`/dashboard/${menuRouteList[index]}`}
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={[
                   {
-                    minWidth: 0,
-                    justifyContent: "center",
+                    minHeight: 48,
+                    px: 2.5,
                   },
                   open
                     ? {
-                        mr: 3,
+                        justifyContent: "initial",
                       }
                     : {
-                        mr: "auto",
+                        justifyContent: "center",
                       },
                 ]}
               >
-                {menuListIcons[index]}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: "center",
+                    },
+                    open
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: "auto",
+                        },
+                  ]}
+                >
+                  {menuListIcons[index]}
+                </ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  sx={{
+                    color: theme.palette.text.primary,
+                    opacity: open ? 1 : 0,
+                  }}
+                />
+              </ListItemButton>
+            </NextLink>
           </ListItem>
         ))}
       </List>

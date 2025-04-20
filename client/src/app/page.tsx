@@ -2,11 +2,10 @@
 
 import { useSession } from "next-auth/react";
 
-import Dashboard from "@/app/dashboard/dashboard";
+import Dashboard from "@/app/dashboard/Dashboard";
 import Login from "@/app/components/login";
-import SideMenu from "@/app/components/sideMenu";
 
-import scss from "./Home.module.scss";
+import scss from "./components/layout/Layout.module.scss";
 import React from "react";
 
 const Home: React.FC = () => {
@@ -14,13 +13,8 @@ const Home: React.FC = () => {
 
   return (
     <main className={scss.main}>
-      {session && (
-        <>
-          <Dashboard />
-          <SideMenu />
-        </>
-      )}
-      <Login />
+      {session && <Dashboard />}
+      {!session && <Login />}
     </main>
   );
 };
