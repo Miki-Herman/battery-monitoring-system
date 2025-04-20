@@ -1,5 +1,5 @@
 "use client";
-import SideMenu from "@/app/components/sideMenu";
+import SideMenu from "../SideMenu";
 import scss from "./Layout.module.scss";
 import { useSession } from "next-auth/react";
 import React from "react";

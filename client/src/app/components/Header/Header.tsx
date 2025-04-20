@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import BatterySaverIcon from "@mui/icons-material/BatterySaver";
-import ThemeToggle from "@/app/components/themeToggle";
+import ThemeToggle from "../ThemeToggle";
 import { useMediaQuery } from "@mui/material";
 
 export type HeaderProps = {

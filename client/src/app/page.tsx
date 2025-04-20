@@ -3,9 +3,9 @@
 import { useSession } from "next-auth/react";
 
 import Dashboard from "@/app/dashboard/Dashboard";
-import Login from "@/app/components/login";
+import Login from "components/Login";
 
-import scss from "./components/layout/Layout.module.scss";
+import scss from "@/app/components/Layout/Layout.module.scss";
 import React from "react";
 
 const Home: React.FC = () => {

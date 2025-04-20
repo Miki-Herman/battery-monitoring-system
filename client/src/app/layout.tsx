@@ -6,8 +6,8 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import React from "react";
 import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
-import Header from "./components/header";
-import Layout from "./components/layout";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
