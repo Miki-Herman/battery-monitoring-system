@@ -8,14 +8,18 @@ export const authOptions: NextAuthOptions = {
                 clientSecret: process.env.GOOGLE_SECRET as string,
                 authorization: {
                     params: {
-                        prompt: "consent",
                         access_type: "offline",
                         response_type: "code"
                     }
                 }
             }
         )
-    ]
+    ],
+    callbacks: {
+        async signIn({ account, profile }) {
+            return true;
+        }
+    }
 };
 
 export default NextAuth(authOptions);

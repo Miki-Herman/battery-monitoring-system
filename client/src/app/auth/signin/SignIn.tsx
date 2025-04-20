@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Login from "@/app/components/Login";
 import { useSession } from "next-auth/react";
