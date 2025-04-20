@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 
 import Dashboard from "@/app/dashboard/Dashboard";
-import Login from "components/Login";
+import Login from "@/app/components/Login";
 
 import scss from "@/app/components/Layout/Layout.module.scss";
 import React from "react";
