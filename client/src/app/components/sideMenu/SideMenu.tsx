@@ -89,7 +89,7 @@ const SideMenu = () => {
           ...closedMixin(theme),
           "& .MuiDrawer-paper": {
             ...closedMixin(theme),
-            top: 64,
+            top: mobileCheck ? 64 : 54,
             left: 0,
           },
         }),
