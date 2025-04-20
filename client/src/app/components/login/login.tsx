@@ -1,23 +1,31 @@
 "use client";
 
-import { useSession, signIn, signOut} from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Button from "@mui/material/Button";
 
 const Login = () => {
-    const { data : session } = useSession();
-    if (session) {
-        return (
-            <>
-                <Button variant={"contained"} color={"error"} onClick={() => signOut()}>Sign out</Button>
-            </>
-        )
-    }
+  const { data: session } = useSession();
+  if (session) {
     return (
-        <>
-            <h2 style={{ marginBottom: '16px' }}>Please login</h2>
-            <Button variant={"contained"} color={"success"} onClick={() => signIn("google")}>Sign in</Button>
-        </>
-    )
+      <>
+        <Button variant={"contained"} color={"error"} onClick={() => signOut()}>
+          Sign out
+        </Button>
+      </>
+    );
+  }
+  return (
+    <>
+      <h2 style={{ marginBottom: "16px" }}>Please login</h2>
+      <Button
+        variant={"contained"}
+        color={"success"}
+        onClick={() => signIn("google")}
+      >
+        Sign in
+      </Button>
+    </>
+  );
 };
 
 export default Login;
