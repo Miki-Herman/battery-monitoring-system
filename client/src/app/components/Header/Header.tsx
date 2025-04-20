@@ -39,10 +39,10 @@ const Header = (props: HeaderProps) => {
 
   const userName = session?.user?.name ?? "User";
   const userEmail = session?.user?.email ?? "";
-  const userProfileImg = session?.user?.image ?? undefined;
+  const userProfileImg = (session?.user?.image as string) ?? undefined;
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ marginBottom: "35px" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Left side logo */}

@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { signOut } from "next-auth/react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -68,6 +69,13 @@ const SideMenu = () => {
     setOpen(!open);
   };
 
+  const handleListItemButtonClick = (text: string) => {
+    if (text === "Sign Out") {
+      signOut();
+    }
+    setOpen(false);
+  };
+
   return (
     <Drawer
       variant="permanent"
@@ -113,6 +121,9 @@ const SideMenu = () => {
               href={`/dashboard/${menuRouteList[index]}`}
             >
               <ListItemButton
+                onClick={() => handleListItemButtonClick(text)}
+                title={text}
+                aria-label={text}
                 sx={[
                   {
                     minHeight: 48,

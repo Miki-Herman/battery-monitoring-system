@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 const Login = () => {
   const { data: session } = useSession();
+
   if (session) {
     return (
       <>
@@ -16,12 +17,7 @@ const Login = () => {
   }
   return (
     <>
-      <h2 style={{ marginBottom: "16px" }}>Please login</h2>
-      <Button
-        variant={"contained"}
-        color={"success"}
-        onClick={() => signIn("google")}
-      >
+      <Button variant={"contained"} color={"success"} onClick={() => signIn()}>
         Sign in
       </Button>
     </>
