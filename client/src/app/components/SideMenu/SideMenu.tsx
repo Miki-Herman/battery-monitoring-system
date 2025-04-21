@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Person2Icon from "@mui/icons-material/Person2";
 import Settings from "@mui/icons-material/Settings";
-import BarChartIcon from "@mui/icons-material/BarChart";
+import HomeIcon from '@mui/icons-material/Home';
 import NextLink from "next/link";
 import { Drawer, useMediaQuery } from "@mui/material";
 import scss from "./SideMenu.module.scss";
@@ -51,10 +51,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const menuRouteList = ["data", "profile", "settings", ""];
+const menuRouteList = ["", "dashboard/profile", "dashboard/settings", ""];
 const menuListTranslations = ["Data", "Profile", "Settings", "Sign Out"];
 const menuListIcons = [
-  <BarChartIcon key="data" />,
+  <HomeIcon key="data" />,
   <Person2Icon key="profile" />,
   <Settings key="settings" />,
   <ExitToAppIcon key="signOut" />,
@@ -118,7 +118,7 @@ const SideMenu = () => {
           <ListItem key={text} disablePadding sx={{ display: "block" }}>
             <NextLink
               className={scss.link}
-              href={`/dashboard/${menuRouteList[index]}`}
+              href={`/${menuRouteList[index]}`}
             >
               <ListItemButton
                 onClick={() => handleListItemButtonClick(text)}
