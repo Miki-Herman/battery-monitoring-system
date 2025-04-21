@@ -50,8 +50,7 @@ export default function ClientLayout({
     [],
   );
 
-  // Only render the header when the component is mounted on the client
-  // This prevents hydration mismatch errors
+  // Use a consistent structure for both server and client rendering
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider
@@ -59,8 +58,9 @@ export default function ClientLayout({
       >
         <SessionProvider>
           <CssBaseline />
-          {mounted && <Header ColorModeContext={ColorModeContext} />}
-          {!mounted && <div style={{ marginBottom: "35px" }}></div>}
+          <div style={{ visibility: mounted ? "visible" : "hidden", marginBottom: "35px" }}>
+            <Header ColorModeContext={ColorModeContext} />
+          </div>
           <Layout>{children}</Layout>
         </SessionProvider>
       </ThemeProvider>
