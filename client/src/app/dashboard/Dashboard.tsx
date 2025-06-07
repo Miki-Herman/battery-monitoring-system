@@ -1,35 +1,53 @@
-import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, Typography, CircularProgress } from "@mui/material";
 import scss from "./Dashboard.module.scss";
 import DataGraph from "@/app/components/DataGraph";
-import { data as mockData } from "@/app/components/mockData";
+import { fetchBatteryData } from "@/helper/apiService";
 
 const Dashboard = () => {
   // Labels for each chart type
-
-  //const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //  fetch(process.env.API_URL + "/data?systemId=" + process.env.SYSTEM_ID)
-  //      .then(res => res.json())
-  //      .then(res => setData(res.result))
-  // }, []);
-
   const chartLabels = ["Voltage", "Temperature", "Current"];
 
-  // Process mockData to create Chart.js compatible datasets
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const systemId = process.env.NEXT_PUBLIC_SYSTEM_ID;
+        if (!systemId) {
+          throw new Error("SYSTEM_ID is not defined in environment variables");
+        }
+
+        const result = await fetchBatteryData(systemId);
+        setData(result);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError(err.message || "Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Process data to create Chart.js compatible datasets
   const processedData = (() => {
     if (
-      !mockData ||
-      !mockData.result ||
-      !Array.isArray(mockData.result) ||
-      mockData.result.length === 0
+      !data ||
+      !data.result ||
+      !Array.isArray(data.result) ||
+      data.result.length === 0
     ) {
       return [];
     }
 
     // Sort data by timestamp
-    const sortedData = [...mockData.result].sort(
+    const sortedData = [...data.result].sort(
       (a, b) => a.timestamp - b.timestamp,
     );
 
@@ -132,7 +150,31 @@ const Dashboard = () => {
       <Typography variant="h4" component="h1" gutterBottom>
         Battery Monitoring Dashboard
       </Typography>
-      {processedData.length > 0 ? (
+
+      {loading ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="200px"
+        >
+          <CircularProgress />
+          <Typography variant="body1" sx={{ ml: 2 }}>
+            Loading data...
+          </Typography>
+        </Box>
+      ) : error ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="200px"
+        >
+          <Typography variant="body1" color="error">
+            Error: {error}
+          </Typography>
+        </Box>
+      ) : processedData.length > 0 ? (
         <>
           <Grid item xs={10} sm={6} md={4} lg={3} sx={{ marginTop: "10px" }}>
             <Box className={scss.chartContainer}>
