@@ -31,7 +31,7 @@ export const fetchBatteryData = async (systemId: string, token: any) => {
 
 export const createUser = async (
   userId: string,
-  userEmail: string,
+  userEmail: string | null | undefined,
   token: any,
 ) => {
   try {
