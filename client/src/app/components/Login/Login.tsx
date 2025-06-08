@@ -1,6 +1,6 @@
 "use client";
 
-import { createUser } from "@/helper/apiService";
+import { createUser, getUser } from "@/helper/apiService";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
@@ -13,11 +13,14 @@ const Login = () => {
     const syncUser = async () => {
       if (session?.user?.id && !hasSynced) {
         try {
-          const res = createUser(
-            session.user.id,
-            session.user.email,
-            session.accessToken,
-          );
+          const user = await getUser(session.user.id, session.accessToken);
+          if (!user) {
+            const res = createUser(
+              session.user.id,
+              session.user.email,
+              session.accessToken,
+            );
+          }
           if (!res.ok) throw new Error("Sync failed");
           setHasSynced(true);
         } catch (err) {

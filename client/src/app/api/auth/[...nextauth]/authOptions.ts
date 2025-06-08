@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { SignJWT } from "jose";
+import { SignJWT, importPKCS8 } from "jose";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -44,35 +44,21 @@ export const authOptions: NextAuthOptions = {
 };
 
 async function generateRS256Token(payload: any): Promise<string> {
-  const privateKeyPEM = process.env.JWT_PRIVATE_KEY!;
-  const privateKey = await importPrivateKey(privateKeyPEM);
+  const alg = "RS256";
+  const pemKey = process.env.JWT_PRIVATE_KEY!;
 
-  const jwt = await new SignJWT(payload)
-    .setProtectedHeader({ alg: "RS256" })
+  const pkcs8Key = await importPKCS8(normalizePem(pemKey), alg);
+
+  return await new SignJWT(payload)
+    .setProtectedHeader({ alg })
     .setIssuedAt()
     .setExpirationTime("1h")
-    .sign(privateKey);
-
-  return jwt;
+    .sign(pkcs8Key);
 }
 
-async function importPrivateKey(pem: string): Promise<CryptoKey> {
-  const str = pem
-    .replace(/-----BEGIN PRIVATE KEY-----/, "")
-    .replace(/-----END PRIVATE KEY-----/, "")
-    .replace(/\n/g, "");
-
-  const binaryDer = Buffer.from(str, "base64");
-  return await crypto.subtle.importKey(
-    "pkcs8",
-    binaryDer,
-    {
-      name: "RSASSA-PKCS1-v1_5",
-      hash: "SHA-256",
-    },
-    true,
-    ["sign"],
-  );
+// converts string with \n into valid PEM string
+function normalizePem(pem: string): string {
+  return pem.replace(/\\n/g, "\n");
 }
 
 export default NextAuth(authOptions);

@@ -4,12 +4,12 @@
 
 export const fetchBatteryData = async (systemId: string, token: any) => {
   try {
-    if (!process.env.BACKEND_API_URL) {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
     }
 
     const response = await fetch(
-      `${process.env.BACKEND_API_URL}/data?system_id=${systemId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/data?system_id=${systemId}`,
       {
         method: "GET",
         headers: {
@@ -35,20 +35,24 @@ export const createUser = async (
   token: any,
 ) => {
   try {
-    if (!process.env.BACKEND_API_URL) {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
     }
-    const response = await fetch(`${process.env.BACKEND_API_URL}/user`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          userId: userId,
+          sensors: [],
+        }),
       },
-      body: JSON.stringify({
-        email: userEmail,
-        userId: userId,
-        sensors: [],
-      }),
-    });
+    );
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     }
@@ -60,12 +64,12 @@ export const createUser = async (
 
 export const getUser = async (userId: string, token: any) => {
   try {
-    if (!process.env.BACKEND_API_URL) {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
     }
 
     const response = await fetch(
-      `${process.env.BACKEND_API_URL}/user?userId=${userId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user?userId=${userId}`,
       {
         method: "GET",
         headers: {
@@ -88,16 +92,20 @@ export const updateUser = async (
   token: any,
 ) => {
   try {
-    if (!process.env.BACKEND_API_URL) {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
     }
-    const response = await fetch(`${process.env.BACKEND_API_URL}/user`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ sensors: sensors, userId: userId }),
       },
-      body: JSON.stringify({ sensors: sensors, userId: userId }),
-    });
+    );
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     }
