@@ -21,7 +21,7 @@ const Dashboard = () => {
           throw new Error("SYSTEM_ID is not defined in environment variables");
         }
 
-        const result = await fetchBatteryData(systemId);
+        const result = await fetchBatteryData(systemId, session.accessToken);
         setData(result);
         setError(null);
       } catch (err) {

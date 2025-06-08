@@ -2,7 +2,7 @@
  * API service for fetching data from the backend
  */
 
-export const fetchBatteryData = async (systemId: string, token: any) => {
+export const fetchBatteryData = async (systemId: string, token: string) => {
   try {
     if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
@@ -32,7 +32,7 @@ export const fetchBatteryData = async (systemId: string, token: any) => {
 export const createUser = async (
   userId: string,
   userEmail: string | null | undefined,
-  token: any,
+  token: string,
 ) => {
   try {
     if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
@@ -62,7 +62,7 @@ export const createUser = async (
   }
 };
 
-export const getUser = async (userId: string, token: any) => {
+export const getUser = async (userId: string, token: string) => {
   try {
     if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
       throw new Error("API_URL is not defined in environment variables");
@@ -89,7 +89,7 @@ export const getUser = async (userId: string, token: any) => {
 export const updateUser = async (
   userId: string,
   sensors: string[],
-  token: any,
+  token: string,
 ) => {
   try {
     if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
