@@ -1,5 +1,4 @@
 from flask_smorest import Api
-from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
@@ -17,7 +16,6 @@ api = Api(spec_kwargs={
         }
     }
 })
-jwt = JWTManager()
 cors = CORS()
 
 class Mongo:

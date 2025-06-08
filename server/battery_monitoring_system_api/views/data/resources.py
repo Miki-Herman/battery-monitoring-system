@@ -1,5 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
+
+from battery_monitoring_system_api.protected_view import ProtectedView
 from battery_monitoring_system_api.views.schemas import create_error_schema
 from battery_monitoring_system_api.views.data.schemas import BatteryDataSchema, BatteryQuerySchema
 from pymongo.errors import ConnectionFailure
@@ -26,7 +28,7 @@ class SubmitResource(MethodView):
             return {"error":create_error_schema(1), "message": str(e)}, 500
 
 @blp.route("")
-class OutputResource(MethodView):
+class OutputResource(MethodView, ProtectedView):
 
     @blp.doc(security=[])
     @blp.arguments(BatteryQuerySchema, location='query')

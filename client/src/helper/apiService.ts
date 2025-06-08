@@ -96,7 +96,7 @@ export const updateUser = async (
       headers: {
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ sensors: sensors }),
+      body: JSON.stringify({ sensors: sensors, userId: userId }),
     });
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
