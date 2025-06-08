@@ -1,3 +1,4 @@
+from typing import List
 from marshmallow import Schema, fields, validate
 
 class UserQuerySchema(Schema):

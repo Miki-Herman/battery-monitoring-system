@@ -1,8 +1,8 @@
 from flask_smorest import Api
-from battery_monitoring_system_api.views import info, data
+from battery_monitoring_system_api.views import info, data, user
 
 RESOURCES = [
-    info, data
+    info, data, user
 ]
 
 
