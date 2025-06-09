@@ -3,6 +3,7 @@ import { Box, Grid, Typography, CircularProgress } from "@mui/material";
 import scss from "./Dashboard.module.scss";
 import DataGraph from "@/app/components/DataGraph";
 import { fetchBatteryData } from "@/helper/apiService";
+import { UseSensor } from "@/context/SensorContext";
 
 const Dashboard = () => {
   // Labels for each chart type
@@ -16,12 +17,15 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const systemId = process.env.NEXT_PUBLIC_SYSTEM_ID;
+        const { selectedSensor } = UseSensor();
         if (!systemId) {
           throw new Error("SYSTEM_ID is not defined in environment variables");
         }
 
-        const result = await fetchBatteryData(systemId, session.accessToken);
+        const result = await fetchBatteryData(
+          selectedSensor as string,
+          session.accessToken,
+        );
         setData(result);
         setError(null);
       } catch (err) {
