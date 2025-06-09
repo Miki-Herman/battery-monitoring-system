@@ -2,6 +2,36 @@
  * API service for fetching data from the backend
  */
 
+export const fetchToken = async (googleId: string) => {
+  try {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
+      throw new Error("API_URL is not defined in environment variables");
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          googleId: googleId,
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching battery data:", error);
+    throw error;
+  }
+};
+
 export const fetchBatteryData = async (systemId: string, token: string) => {
   try {
     if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {

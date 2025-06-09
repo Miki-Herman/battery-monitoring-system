@@ -7,6 +7,7 @@ readme = "README.md"
 packages = [{include = "battery_monitoring_system_api"}]
 
 [tool.poetry.dependencies]
+google-auth= "2.40.3"
 python = "^3.11"
 Flask = "==3.0.3"
 flask-smorest = "==0.44.0"

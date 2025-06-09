@@ -1,5 +1,6 @@
 {
   "JWT_PUBLIC_KEY": "<enter_public_key>",
+  "JWT_SECRET_KEY": "<enter_secret_key>",
   "JWT_ALGORITHM": "RS256",
   "DATABASE_CONN_STR": "<enter_connection_string>",
   "ERROR_MAP": {

@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { SignJWT, importPKCS8 } from "jose";
+import { fetchToken } from "@/helper/apiService";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,14 +19,15 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt", // use JWT-based session strategy
   },
 
-  secret: process.env.JWT_SECRET_KEY,
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      if (account?.provider === "google" && account.id_token) {
+        token.id_token = account.id_token;
+      }
       if (user) {
         token.id = user.id;
         token.email = user.email;
       }
-
       return token;
     },
     async signIn({ account, profile }) {
@@ -36,29 +37,11 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.email = token.email as string;
-        session.accessToken = await generateRS256Token(token); // add signed JWT to session
+        session.accessToken = await fetchToken(token.id_token as string);
       }
       return session;
     },
   },
 };
-
-async function generateRS256Token(payload: any): Promise<string> {
-  const alg = "RS256";
-  const pemKey = process.env.JWT_PRIVATE_KEY!;
-
-  const pkcs8Key = await importPKCS8(normalizePem(pemKey), alg);
-
-  return await new SignJWT(payload)
-    .setProtectedHeader({ alg })
-    .setIssuedAt()
-    .setExpirationTime("1h")
-    .sign(pkcs8Key);
-}
-
-// converts string with \n into valid PEM string
-function normalizePem(pem: string): string {
-  return pem.replace(/\\n/g, "\n");
-}
 
 export default NextAuth(authOptions);
