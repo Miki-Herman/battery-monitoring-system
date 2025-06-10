@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: "jwt", // use JWT-based session strategy
+    strategy: "jwt",
   },
 
   callbacks: {
@@ -37,7 +37,11 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.email = token.email as string;
-        session.accessToken = await fetchToken(token.id_token as string);
+
+        const fetchedToken = await fetchToken(token.id_token);
+
+        session.accessToken = fetchedToken.token;
+
       }
       return session;
     },

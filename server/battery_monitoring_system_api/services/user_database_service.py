@@ -6,7 +6,8 @@ class UserDatabaseService:
 
     def get_one(self, user_id):
         data = self.database.user.find_one({"userId": user_id})
-        data.update({"_id": str(data.get("_id"))})
+        if data:
+            data.update({"_id": str(data.get("_id"))})
         return data
 
     def update_one(self, user_id, sensors):

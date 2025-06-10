@@ -11,5 +11,5 @@ class BatteryDataSchema(Schema):
 
 
 class BatteryQuerySchema(Schema):
-    system_id: str = fields.Str(required=True, description="Id of monitoring system")
+    systemId: str = fields.Str(required=True, description="Id of monitoring system")
     id: str = fields.Str(required=False, description="Id of certain data")

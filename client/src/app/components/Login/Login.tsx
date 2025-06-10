@@ -14,6 +14,7 @@ const Login = () => {
       if (session?.user?.id && !hasSynced) {
         try {
           const user = await getUser(session.user.id, session.accessToken);
+
           if (!user.result) {
             const res = createUser(
               session.user.id,

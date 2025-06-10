@@ -1,7 +1,8 @@
+"use client";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import React from "react";
 import ClientLayout from "./ClientLayout";
-import { SensorProvider } from "@/context/SensorContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +25,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
-        <SensorProvider>
           <ClientLayout>{children}</ClientLayout>
-        </SensorProvider>
       </body>
     </html>
   );

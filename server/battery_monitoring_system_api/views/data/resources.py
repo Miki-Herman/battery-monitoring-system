@@ -34,7 +34,7 @@ class OutputResource(MethodView, ProtectedView):
     @blp.arguments(BatteryQuerySchema, location='query')
     def get(self, query):
         object_id: str = query.get('id')
-        system_id: str = query.get('system_id')
+        system_id: str = query.get('systemId')
 
         if object_id:
             from battery_monitoring_system_api.di import battery_database_service

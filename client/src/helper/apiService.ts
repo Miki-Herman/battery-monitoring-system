@@ -39,7 +39,7 @@ export const fetchBatteryData = async (systemId: string, token: string) => {
     }
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/data?system_id=${systemId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/data?systemId=${systemId}`,
       {
         method: "GET",
         headers: {
@@ -104,6 +104,7 @@ export const getUser = async (userId: string, token: string) => {
         method: "GET",
         headers: {
           authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       },
     );

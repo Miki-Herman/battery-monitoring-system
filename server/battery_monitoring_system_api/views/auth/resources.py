@@ -13,7 +13,7 @@ from battery_monitoring_system_api.views.auth.schemas import AuthDataSchema
 blp = Blueprint('auth', 'auth', url_prefix="/auth")
 
 @blp.route("")
-class OutputResource(MethodView, ProtectedView):
+class OutputResource(MethodView):
 
     @blp.doc(security=[])
     @blp.arguments(AuthDataSchema, location='json')
