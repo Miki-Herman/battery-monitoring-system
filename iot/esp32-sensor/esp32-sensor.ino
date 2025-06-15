@@ -1,6 +1,6 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
-#include <ArduinoJson.h> // <- přidej tuto knihovnu
+#include <ArduinoJson.h>
 
 const char* ssid = "<enter_wifi_name>";
 const char* password = "<enter_wifi_password>";
