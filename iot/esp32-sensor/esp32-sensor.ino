@@ -2,9 +2,9 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h> // <- přidej tuto knihovnu
 
-const char* ssid = "IoTWiFi24GHz";
-const char* password = "ubpm4h36m36u";
-const char* mqtt_server = "192.168.1.65";
+const char* ssid = "<enter_wifi_name>";
+const char* password = "<enter_wifi_password>";
+const char* mqtt_server = "<enter_mqtt_server_ip>";
 const int wifi_channel = 6;
 
 WiFiClient espClient;
