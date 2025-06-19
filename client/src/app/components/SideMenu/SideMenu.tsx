@@ -51,12 +51,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const menuRouteList = ["", "dashboard/profile", "dashboard/settings", ""];
-const menuListTranslations = ["Data", "Profile", "Settings", "Sign Out"];
+const menuRouteList = ["", ""];
+const menuListTranslations = ["Data", "Sign Out"];
 const menuListIcons = [
   <HomeIcon key="data" />,
-  <Person2Icon key="profile" />,
-  <Settings key="settings" />,
   <ExitToAppIcon key="signOut" />,
 ];
 
