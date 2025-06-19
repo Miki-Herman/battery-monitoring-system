@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 
-import Combobox from "@/app/components/ComboBox";
+import SensorSelector from "@/app/components/SensorSelector";
 import Login from "@/app/components/Login";
 
 import scss from "@/app/components/Layout/Layout.module.scss";
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   return (
     <main className={scss.main}>
-      {session && <Combobox session={session} />}
+      {session && <SensorSelector session={session} />}
       {!session && <Login />}
     </main>
   );
