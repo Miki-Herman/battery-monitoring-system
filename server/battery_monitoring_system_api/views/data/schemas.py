@@ -13,3 +13,7 @@ class BatteryDataSchema(Schema):
 class BatteryQuerySchema(Schema):
     systemId: str = fields.Str(required=True, description="Id of monitoring system")
     id: str = fields.Str(required=False, description="Id of certain data")
+    timestamp: str = fields.Integer(required=False, description="Since when we receive data")
+
+
+
