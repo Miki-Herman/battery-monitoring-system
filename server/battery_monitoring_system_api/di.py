@@ -9,6 +9,7 @@ google_client_id = config.get("GOOGLE_CLIENT_ID", "")
 
 
 private_key = config.get("JWT_PRIVATE_KEY", "")
+public_key = config.get("JWT_PUBLIC_KEY", "")
 algorithm = config.get("JWT_ALGORITHM", "")
 
 gateway_key = config.get("JWT_GATEWAY_KEY", "")

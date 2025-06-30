@@ -37,7 +37,7 @@ class OutputResource(MethodView):
                 "role": ["user"]
             }
 
-            token = jwt.encode(payload, private_key, algorithm=algorithm)
+            token = jwt.encode(payload, private_key, algorithm=[algorithm])
             return {"error":create_error_schema(0), "token": token}, 200
 
         except ValueError:
@@ -52,7 +52,7 @@ class GatewayAuthResource(MethodView):
 
         from battery_monitoring_system_api.di import private_key, algorithm, gateway_key, gateway_algorithm
         try:
-            jwt_token = jwt.decode(gateway_token, gateway_key, algorithms = gateway_algorithm)
+            jwt_token = jwt.decode(gateway_token, gateway_key, algorithms=[gateway_algorithm])
 
             gateway_sub = jwt_token.get("sub")
 
@@ -63,7 +63,7 @@ class GatewayAuthResource(MethodView):
                 "role": ["gateway"]
             }
 
-            token = jwt.encode(payload, private_key, algorithm=algorithm)
+            token = jwt.encode(payload, private_key, algorithm=[algorithm])
             return {"error":create_error_schema(0), "token": token}, 200
 
         except jwt.InvalidTokenError:

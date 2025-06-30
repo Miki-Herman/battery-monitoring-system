@@ -10,8 +10,14 @@ class BatteryDatabaseService:
         data = self.database.battery_data.find_one({"_id": ObjectId(object_id), "system_id": system_id})
         return data
 
-    def get_all_by_key(self, key, value):
-        data = self.database.battery_data.find({key: value}).sort("timestamp", ASCENDING)
+    def get_all_by_key(self, key, value, time_filter):
+
+        query = {
+            key: value,
+            "timestamp": {"$gte": time_filter}
+        }
+
+        data = self.database.battery_data.find(query).sort("timestamp", ASCENDING)
         result = []
 
         for data in data:
