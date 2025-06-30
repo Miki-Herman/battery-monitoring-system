@@ -11,6 +11,9 @@ google_client_id = config.get("GOOGLE_CLIENT_ID", "")
 private_key = config.get("JWT_PRIVATE_KEY", "")
 algorithm = config.get("JWT_ALGORITHM", "")
 
+gateway_key = config.get("JWT_GATEWAY_KEY", "")
+gateway_algorithm = config.get("JWT_GATEWAY_ALGORITHM", "")
+
 battery_database_service = BatteryDatabaseService()
 user_database_service = UserDatabaseService()
 

@@ -10,7 +10,7 @@ blp = Blueprint('data', 'data', url_prefix="/data")
 
 
 @blp.route('/submit')
-class SubmitResource(MethodView):
+class SubmitResource(MethodView, ProtectedView):
 
     @blp.doc(security=[])
     @blp.arguments(BatteryDataSchema, location='json')
